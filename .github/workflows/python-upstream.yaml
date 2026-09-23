@@ -13,7 +13,9 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  # A push to main shares refs/heads/main with the scheduled run; without the
+  # event name in the group, that push cancels the running nightly.
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name }}
   cancel-in-progress: true
 
 permissions:

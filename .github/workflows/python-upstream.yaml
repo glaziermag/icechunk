@@ -29,7 +29,7 @@ jobs:
   build-wheels:
     name: build-wheels
     # Two jobs wait on this compile, so it gets the paid 8-core runner; forks do not
-    runs-on: ${{ github.event.pull_request.head.repo.fork && 'ubuntu-latest' || 'ubuntu24-8-core-amd64' }}
+    runs-on: ubuntu-latest # probe: this fork has no 8-core runner
     if: ${{
       (contains(github.event.pull_request.labels.*.name, 'test-upstream') && github.event_name == 'pull_request')
       || github.event_name == 'workflow_dispatch'
